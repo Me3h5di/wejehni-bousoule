@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>وجهني — موتور البحث عن التخصص الجامعي</title>
+<link rel="icon" type="image/svg+xml" href="Group 14.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="ticker">
+  <div class="ticker__track">
+    <span>وجهني</span><span class="dot"></span>
+    <span>+65 تخصصاً</span><span class="dot"></span>
+    <span>عليك الباك وعلينا لافاك</span><span class="dot"></span>
+    <span>وجهني</span><span class="dot"></span>
+    <span>+65 تخصصاً</span><span class="dot"></span>
+    <span>عليك الباك وعلينا لافاك</span><span class="dot"></span>
+    <span>وجهني</span><span class="dot"></span>
+    <span>+65 تخصصاً</span><span class="dot"></span>
+    <span>عليك الباك وعلينا لافاك</span><span class="dot"></span>
+  </div>
+</div>
+
+<header class="nav">
+  <img src="logo.png" alt="وجهني" class="nav__logo">
+  <nav class="nav__links">
+    <a href="#comment">كيف يعمل</a>
+    <a href="#recherche">ابدأ الآن</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero__shape" aria-hidden="true"></div>
+  <div class="hero__content">
+    <p class="eyebrow">موتور البحث عن التخصص</p>
+    <h1>اختر ما يعبّر عنك،<br><span>وجهني</span> يقترح عليك التخصص المناسب</h1>
+    <p class="hero__sub">اختر الكلمات التي تعبّر عن اهتماماتك، حدد شعبتك اختيارياً، واكتشف التخصصات الجامعية الأقرب إليك مع مسارك الكامل نحو المهنة.</p>
+  </div>
+
+  <section id="teaser" class="search-card teaser">
+    <div class="teaser__progress">
+      <span class="teaser__dot" data-step="0"></span>
+      <span class="teaser__dot" data-step="1"></span>
+      <span class="teaser__dot" data-step="2"></span>
+    </div>
+    <p id="teaser-question" class="teaser__question"></p>
+    <div id="teaser-options" class="teaser__options"></div>
+    <button type="button" id="teaser-skip" class="teaser__skip">تخطي، سأختار الكلمات بنفسي</button>
+  </section>
+
+  <form id="recherche" class="search-card" hidden>
+    <label class="search-card__label">اختر الكلمات التي تعبّر عن اهتماماتك (اضغط على كل كلمة تناسبك)</label>
+
+    <p id="suggestion-note" class="suggestion-note" hidden>اقترحنا لك بعض الكلمات بناءً على إجاباتك — عدّلها أو أضف المزيد لتحصل على نتيجة أدق.</p>
+
+    <div class="mots-filtre">
+      <i class="icon-search-sm" aria-hidden="true"></i>
+      <input type="text" id="filtre-mots" placeholder="ابحث عن كلمة… مثال: ذكاء اصطناعي" autocomplete="off">
+    </div>
+
+    <div id="pool-motscles" class="pool-mots"></div>
+    <p id="pool-vide" class="pool-vide" hidden>لا توجد كلمة مطابقة لبحثك</p>
+
+    <div class="selection-resume">
+      <p id="selection-count">0 كلمة مختارة</p>
+      <div id="selection-chips" class="selection-chips"></div>
+    </div>
+
+    <div class="search-card__row">
+      <div class="field">
+        <label for="bac">شعبة البكالوريا (اختياري)</label>
+        <select id="bac">
+          <option value="">— بدون تحديد —</option>
+          <option value="Sciences Expérimentales">علوم تجريبية</option>
+          <option value="Mathématiques">رياضيات</option>
+          <option value="Techniques Mathématiques">تقني رياضي</option>
+          <option value="Gestion et Économie">تسيير واقتصاد</option>
+          <option value="Lettres et Philosophie">آداب وفلسفة</option>
+          <option value="Langues étrangères">لغات أجنبية</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn--primary" id="btn-chercher" disabled>
+        <i class="icon-search" aria-hidden="true"></i> ابحث عن تخصصي
+      </button>
+    </div>
+  </form>
+</section>
+
+<main id="resultats" class="results" hidden>
+  <div class="results__header">
+    <h2 id="resultats-titre">النتائج</h2>
+    <p id="resultats-sous-titre" class="results__sub"></p>
+  </div>
+  <div id="resultats-liste" class="results__list"></div>
+</main>
+
+<section id="etat-vide" class="empty-state">
+  <p>اختر كلماتك المفتاحية بالأعلى واضغط "ابحث عن تخصصي" لاكتشاف التخصصات الأنسب لك.</p>
+</section>
+
+<footer class="footer">
+  <img src="logo.png" alt="وجهني" class="footer__logo">
+  <p>المعدلات الدنيا الإرشادية تتغير كل سنة — تحقق دائماً من الموقع الرسمي <span dir="ltr">progres.mesrs.dz</span></p>
+</footer>
+
+<template id="tpl-carte">
+  <article class="carte">
+    <div class="carte__entete">
+      <div>
+        <p class="carte__domaine"></p>
+        <h3 class="carte__nom"></h3>
+      </div>
+      <div class="carte__score"></div>
+    </div>
+
+    <p class="carte__desc"></p>
+
+    <div class="carte__chips"></div>
+
+    <button class="carte__toggle" type="button">
+      <span class="txt-fermer">إخفاء المسار الكامل</span>
+      <span class="txt-ouvrir">عرض المسار الكامل والمهن المستقبلية</span>
+    </button>
+
+    <div class="carte__details">
+      <p class="carte__soustitre">مسارك نحو هذا التخصص</p>
+      <div class="carte__parcours"></div>
+
+      <p class="carte__soustitre">أين يمكن أن تعمل مستقبلاً</p>
+      <div class="carte__metiers"></div>
+    </div>
+  </article>
+</template>
+
+<script src="data.js"></script>
+<script src="keyword_groups.js"></script>
+<script src="engine.js"></script>
+<script src="app.js"></script>
+<script src="teaser.js"></script>
+</body>
+</html>
